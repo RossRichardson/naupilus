@@ -3,10 +3,8 @@
 """
 Interactive Python Menu System. The aim here is for a simple yet conventient menu system with a few nice features.
 Another goal is to minimise any dependencies on using external libraries.
-
 Initial base code released to github. 
 @author: Ross Richardson
-
 Note: this is mix licensed.
 Getch class code is PSF. http://code.activestate.com/recipes/134892/
 The rest is GPLv2
@@ -112,14 +110,14 @@ def print_menu(menu, selected):
             print " %s  " % index,
         print menu[index] + RESET_COL_STR
     
-def navigate_menu(selected, key_value):
+def navigate_menu(menu, selected, key_value):
     """ navigate and adjust for cycling """
     selected += key_value
     
     # cycling correction
     if selected < 1:
-        selected = len(menu_1)-1
-    elif selected > len(menu_1)-1:
+        selected = len(menu)-1
+    elif selected > len(menu)-1:
         selected = 1
     
     return selected
@@ -132,16 +130,16 @@ def navigate_menu(selected, key_value):
 selected = 1 # default
 while(True):
     
-    print_menu(menu_1, selected)
+    print_menu(menu, selected)
     key_value = read_key()
     
     # ON SELECTION/ENTER KEY
     if key_value == 0:
         
-        if menu_1[selected] == 'Exit':
+        if menu[selected] == 'Exit':
             sys.exit(0)
         
         # process other menu items
     
     # UP AND DOWN MOVEMENT
-    selected = navigate_menu(selected, key_value)
+    selected = navigate_menu(menu, selected, key_value)
