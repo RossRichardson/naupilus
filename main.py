@@ -26,20 +26,24 @@ menu = ["Menu Header",
         
         
 """
-\033[93m     # yellow text - transparent background
-\033[95m     # purple text - transparent background
-\033[01;46m  # white text - cyan background
-\033[01;41m  # white text - red background
+\033[93m     # yellow text with transparent background
+\033[95m     # purple text with transparent background
+\033[01;46m  # white text with cyan background
+\033[01;41m  # white text with red background
 """
 
 WHITE_FG_CYAN_BG_STR = "\033[01;46m"
 RESET_COL_STR = "\033[0m"
 CLEAR_SCROLLBACK_STR = "\033c"
 
-import sys, tty, termios
+import sys
+import tty
+import termios
 
 class _Getch:
-    """Gets a single character from standard input.  Does not echo to the screen."""
+    """Gets a single character from standard input.  
+    Does not echo to the screen.
+    """
     def __init__(self):
         try:
             self.impl = _GetchWindows()
@@ -111,7 +115,8 @@ def print_menu(menu, selected):
         print menu[index] + RESET_COL_STR
     
 def navigate_menu(menu, selected, key_value):
-    """ navigate and adjust for cycling """
+    """navigate and adjust for cycling"""
+    
     selected += key_value
     
     # cycling correction
@@ -126,8 +131,10 @@ def navigate_menu(menu, selected, key_value):
 ###
 ### start here
 ###
-    
-selected = 1 # default
+
+# default
+selected = 1
+
 while(True):
     
     print_menu(menu, selected)
